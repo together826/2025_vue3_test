@@ -1,7 +1,6 @@
 <script setup>
-import { ref } from 'vue'
 // 如果使用pinia
-// import useFavoriteStore from '@/stores/favorites'
+// import { useFavoriteStore } from '@/stores/favorites'
 // const favoriteStore = useFavoriteStore()
 
 // 任務6. 移除收藏列表，不限定方式
@@ -25,9 +24,7 @@ const removeFav = (target) => {}
           <p>{{ item.artists }}</p>
         </div>
         <div class="list_action">
-          <button class="favoriteBtn" @click="removeFav(defaultData)">
-            <img src="~@/assets/heartRed.png" alt="移除收藏" />
-          </button>
+          <button @click="removeFav(item)">X</button>
         </div>
       </div>
     </div>
@@ -41,30 +38,28 @@ const removeFav = (target) => {}
   flex-direction: column;
   justify-content: space-between;
   gap: 0.5rem;
-  padding: 0.5rem;
   .nodata {
     width: 100%;
     height: 10rem;
     display: flex;
-    align-items: center;
     justify-content: center;
+    align-items: center;
   }
   .container {
-    max-height: 15rem;
-    min-height: 10rem;
     overflow: hidden;
-    overflow-y: scroll;
+    padding: 5rem 0.5rem 0.5rem 0.5rem;
   }
   .list {
     display: flex;
     flex-direction: row;
     align-items: center;
     gap: 0.5rem;
+    margin-bottom: 0.5rem;
     img {
       width: 4rem;
     }
     &_content {
-      flex: 0 1 calc(100% - 8.5rem);
+      flex: 0 1 calc(100% - 7.5rem);
       h6 {
         font-size: 0.8rem;
       }
@@ -76,10 +71,10 @@ const removeFav = (target) => {}
       display: flex;
       flex-direction: row;
       align-items: center;
-      width: 3.5rem;
+      width: 2.5rem;
       button {
         background-color: transparent;
-        color: #fff;
+        color: rgb(175, 50, 119);
       }
     }
   }
