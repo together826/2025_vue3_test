@@ -1,25 +1,41 @@
 import { ref } from 'vue'
 import { defineStore } from 'pinia'
-// 可以不用做到local storage
 
 export const useFavoriteStore = defineStore('favoriteStore', () => {
   const list = ref([])
 
-  // 任務8. 加入我的最愛
+
+
+  const has = (target) => {
+    const id = target?.id
+    if (!id) return false
+    return list.value.some(item => item.id === id)
+  }
+
+
+
   const addFav = (target) => {
-    console.log(target);
+    const id = target?.id
+    if (!id) return
+    if (!has(target)) list.value.push({ ...target })
   }
 
-  // 移除我的最愛
+
+
   const removeFav = (target) => {
-    const targetID = target && target.id? target.id : null
-    if (!targetID) return
-
-    const idx = list.value.findIndex(fav => fav.id == targetID)
-    if (idx >= 0){
-      list.value.splice(idx, 1)
-    }
+    const id = target?.id
+    if (!id) return
+    const idx = list.value.findIndex(fav => fav.id === id)
+    if (idx >= 0) list.value.splice(idx, 1)
   }
 
-  return { list, addFav, removeFav }
+
+
+  const toggleFav = (target) => {
+    if (has(target)) removeFav(target)
+    else addFav(target)
+  }
+
+  
+  return { list, has, addFav, removeFav, toggleFav }
 })
